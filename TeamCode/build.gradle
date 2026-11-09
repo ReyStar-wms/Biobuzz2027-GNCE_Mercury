@@ -21,6 +21,23 @@ android {
     packagingOptions {
         jniLibs.useLegacyPackaging true
     }
+
+    // Local JVM tests for the robot code, in TeamCode/src/test/java. These run on the laptop
+    // without a Control Hub: run the whole lot with `./gradlew :TeamCode:testDebugUnitTest`, or
+    // hit the green arrow next to any test class in Android Studio.
+    testOptions {
+        unitTests {
+            // Android framework calls (Log, Resources, ...) return 0/null instead of throwing.
+            returnDefaultValues = true
+        }
+        unitTests.all {
+            // Show the telemetry the tests print when they are run from the command line.
+            testLogging {
+                showStandardStreams = true
+                events "passed", "failed", "skipped"
+            }
+        }
+    }
 }
 
 repositories {
@@ -36,4 +53,9 @@ dependencies {
     implementation project(':FtcRobotController')
     implementation "org.solverslib:core:0.3.4" // core
     implementation "org.solverslib:pedroPathing:0.3.4" // pedroPathing
+
+    testImplementation 'junit:junit:4.13.2'
+    // Stands in for motors and servos in the CachedMotor/CachedServo tests, and for the static
+    // telemetry handle ShotPlanner writes to.
+    testImplementation 'org.mockito:mockito-core:5.14.2'
 }
