@@ -1,0 +1,38 @@
+repositories {
+    mavenCentral()
+    google() // Needed for androidx
+    maven {
+        url = "https://repo.dairy.foundation/releases"
+    }
+    maven {
+        url = "https://repo.dairy.foundation/snapshots"
+    }
+    maven {
+        url = "https://mymaven.bylazar.com/releases"
+    }
+}
+
+dependencies {
+    // FTC SDK. Keep these in step with the FtcRobotController module's AndroidManifest version
+    // (versionCode 60 / versionName 11.0). SolversLib asks for 11.1.0, so that is what is pinned.
+    implementation 'org.firstinspires.ftc:Inspection:11.1.0'
+    implementation 'org.firstinspires.ftc:Blocks:11.1.0'
+    //noinspection Aligned16KB
+    implementation 'org.firstinspires.ftc:RobotCore:11.1.0'
+    implementation 'org.firstinspires.ftc:RobotServer:11.1.0'
+    implementation 'org.firstinspires.ftc:OnBotJava:11.1.0'
+    implementation 'org.firstinspires.ftc:Hardware:11.1.0'
+    implementation 'org.firstinspires.ftc:FtcCommon:11.1.0'
+    implementation 'org.firstinspires.ftc:Vision:11.1.0'
+
+    // Pedro Pathing. Must be 2.1.x: the code uses the 2.x package layout
+    // (com.pedropathing.ftc.*, com.pedropathing.paths.PathConstraints), which 3.x renamed.
+    // SolversLib's own transitive pin is 2.0.6, which is too old for MyFusionLocalizer.
+    implementation 'com.pedropathing:ftc:2.1.2'
+    implementation 'com.pedropathing:telemetry:1.0.0'
+
+    // Panels (bylazar): @Configurable live tuning, JoinedTelemetry, the field view and LoopTimer.
+    implementation 'com.bylazar:fullpanels:1.0.20'
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+}
